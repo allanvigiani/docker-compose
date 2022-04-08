@@ -1,0 +1,60 @@
+version: "3.3"
+services:
+    ecidade:
+        working_dir: /var/www/html
+        build: ./configs/ecidade/
+        volumes:
+            - ./ecidadeNfse:/var/www/html:rw
+        ports:
+            - 8002:80
+#        depends_on:
+#            - pg_ecidade
+            
+    ecidadeonline2:
+        working_dir: /var/www/html
+        build: ./configs/ecidadeonline2/
+        volumes:
+            - ./nfse:/var/www/html/e-cidadeonline2:rw
+        ports:
+            - 8003:80
+#        depends_on:
+#            - pg_ecidadeonline2
+#            - ecidade
+
+    # nota-api:
+    #    build: ./configs/nota-api/
+    #    working_dir: /var/www/html
+    #    ports:
+    #        - '8001:80'
+    #    volumes:
+    #        - ./nota-api:/var/www/html
+      
+  
+    # redis:
+    #     image: "redis:alpine"
+    #     container_name: redis
+    #     restart: unless-stopped
+    #     ports:
+    #       - "6379:6379"
+        
+#    pg_ecidade:
+#        build: ./configs/pg_ecidade/
+#        ports:
+#            - 5434:5432
+#        environment:
+#            - POSTGRES_PASSWORD=123456
+#        volumes:
+#            - ./postgres/pg_ecidade:/var/lib/postgresql/data
+#            - ./configs/pg_ecidade/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+#            - ./files:/opt/files_temp:rw
+#    pg_ecidadeonline2:
+#        image: postgres:10-alpine
+#        ports:
+#            - 5433:5432
+#        environment:
+#            - POSTGRES_PASSWORD=123456
+#        command: postgres -c logging_collector=on -c log_destination=stderr -c log_statement=all -c log_min_duration_statement=0
+#        volumes:
+#            - ./postgres/pg_ecidadeonline2:/var/lib/postgresql/data
+#            - ./configs/pg_ecidadeonline2/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+#            - ./files:/opt/files_temp:rw
